@@ -25,7 +25,7 @@
             <label class="font-weight-bold">Khuyến mãi</label>
             <asp:CheckBox ID="chkKhuyenMai" runat="server" Checked="true" CssClass="form-check" />
         </div>
-        <asp:Button ID="btXuLy" runat="server" Text="Lưu" CssClass="btn btn-success" />
+        <asp:Button ID="btXuLy" runat="server" Text="Lưu" CssClass="btn btn-success" OnClick="btXuLy_Click" />
 
     </div>
     <br />

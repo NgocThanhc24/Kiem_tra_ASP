@@ -42,7 +42,25 @@ namespace QLBanSach.Models
         public List<Sach> laySachTheoTen(string tensach)
         {
             var ds = new List<Sach>();
-            //viết code tại đây
+            SqlConnection conn = getConnection();
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("select * from Sach where tensach like @tensach", conn);
+            cmd.Parameters.AddWithValue("@tensach", "%" + tensach + "%");
+            SqlDataReader rd = cmd.ExecuteReader();
+            while (rd.Read())
+            {
+                var sach = new Sach
+                {
+                    MaSach = int.Parse(rd["masach"].ToString()),
+                    TenSach = rd["tensach"].ToString(),                   
+                    Dongia = int.Parse(rd["dongia"].ToString()),                   
+                    MaCD = int.Parse(rd["macd"].ToString()),
+                    Hinh = rd["hinh"].ToString(),
+                    KhuyenMai = bool.Parse(rd["khuyenmai"].ToString()),
+                    NgayCapNhat = DateTime.Parse(rd["ngaycapnhat"].ToString())
+                };
+                ds.Add(sach);
+            }
             return ds;
         }
 
@@ -52,9 +70,10 @@ namespace QLBanSach.Models
             {
                 SqlConnection conn = getConnection();
                 conn.Open();
-                //hiệu chỉnh code tại đây
-                SqlCommand cmd = new SqlCommand("update sach set dongia=@dongia where masach=@masach", conn);
+                SqlCommand cmd = new SqlCommand("update sach set tensach=@tensach, dongia=@dongia, khuyenmai=@khuyenmai where masach=@masach", conn);
+                cmd.Parameters.AddWithValue("@tensach", x.TenSach);
                 cmd.Parameters.AddWithValue("@dongia", x.Dongia);
+                cmd.Parameters.AddWithValue("@khuyenmai", x.KhuyenMai);
                 cmd.Parameters.AddWithValue("@masach", x.MaSach);                
                 return cmd.ExecuteNonQuery();
             }

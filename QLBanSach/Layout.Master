@@ -9,11 +9,11 @@
     <link href="Content/main.css" rel="stylesheet" />
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" enctype="multipart/form-data">
 
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <!-- Brand/logo -->
-            <a class="navbar-brand" href="#">Nhà sách MK</a>
+            <a class="navbar-brand" runat="server" href="~/QTSach.aspx">Nhà sách MK</a>
 
             <!-- Links -->
             <ul class="navbar-nav">
@@ -35,7 +35,7 @@
         </div>
 
         <div class="bg-dark text-light text-center text-uppercase p-2">
-             Mã số - Họ tên sinh viên thực hiện
+             2421160031 - Đặng Ngọc Thạnh
         </div>
     </form>
 </body>
